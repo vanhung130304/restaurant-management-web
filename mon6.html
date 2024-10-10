@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán món Cơm Sen Tịnh Tâm</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://pasgo.vn/Upload/anh-chi-tiet/nha-hang-net-hue-lang-ha-slide-9-normal-129904613475.webp') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #9933cc;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        .food-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .food-image {
+            width: 300px;
+            height: auto;
+            border-radius: 8px;
+            border: 4px solid #9933cc;
+        }
+
+        .food-info {
+            text-align: left;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .food-info h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .food-info p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #ff6600;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e65c00;
+        }
+
+        .home-btn {
+            background-color: #9933cc;
+            margin-left: 10px;
+        }
+
+        .home-btn:hover {
+            background-color: #7a00a3;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thanh Toán Món Cơm Sen Tịnh Tâm</h1>
+        <div class="food-section">
+            <img src="https://nethue.com.vn/temp/-uploaded-banner_C%C6%A1m%20Sen%201_cr_521x521.jpg" alt="Cơm Sen Tịnh Tâm" class="food-image">
+            <div class="food-info">
+                <h2>Cơm Sen Tịnh Tâm</h2>
+                <p>Món cơm sen tịnh tâm đặc biệt, được chế biến từ những nguyên liệu tươi ngon.</p>
+                <p><strong>Giá: 230,000 VND</strong></p>
+                <p><em>Quý khách vui lòng liên hệ đặt trước</em></p>
+                <button class="home-btn" onclick="quayVeTrangChu()">Home</button>
+            </div>
+        </div>
+
+        <footer>
+            &copy; 2024 Nét Huế. Tất cả quyền được bảo lưu.
+        </footer>
+    </div>
+
+    <script>
+        function quayVeTrangChu() {
+            window.location.href = "Thuc_don.html"; // Đổi đường dẫn về trang chủ của bạn
+        }
+    </script>
+</body>
+</html>
