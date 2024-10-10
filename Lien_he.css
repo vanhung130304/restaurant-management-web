@@ -1,0 +1,438 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9; /* Màu nền */
+}
+
+.form {
+    width: 1500px;
+    height: auto;
+    background-color: burlywood; /* Nền của form */
+}
+
+header {
+    height: 520px;
+    background-image: url('./img/Anh_nen.png');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.baner {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ngonngu, .search {
+    display: flex;
+    align-items: center;
+}
+
+.ngonngu h3, .search h3 {
+    margin-left: 5px;
+}
+
+.ngonngu img {
+    border: 0px solid black; 
+    background-color: white; 
+    padding: 2px; 
+    border-radius: 5px; 
+    width: 30px;
+    height: auto;
+    border-radius: 50%;
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+}
+
+.search h3 {
+    margin: 0 5px;
+}
+
+.menu {
+    width: 80%;
+    height: 55px;
+    background-image: url('./img/nen2.png'); 
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: 50px;
+    position: absolute;
+    justify-content: space-between; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    top: 100px;
+}
+
+.main-menu {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    justify-content: center; 
+}
+
+.main-menu li {
+    margin: 0 15px;
+    position: relative;
+    display: flex;
+    align-items: center; 
+}
+
+.menu a {
+    color: black;
+    text-decoration: none;
+}
+
+.Datban {
+    background-color: #eb983e;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.Datban a h3 {
+    color: white;
+    margin: 0;
+}
+
+.menu ul.sub-menu {
+    position: absolute;
+    top: 100%; 
+    left: 0; 
+    display: none;
+}
+
+.menu ul.sub-menu {
+    background-image: url('./img/tuong.jpeg');
+    list-style-type: none;
+    padding: 10px 0;
+    width: 200px;
+    text-align: left;
+    font-size: 11px;
+    display: none; 
+    flex-direction: column;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.menu ul.sub-menu li {
+    padding: 8px 10px; 
+    border-bottom: 1px solid #787171;
+}
+
+.menu ul.sub-menu li:last-child {
+    border-bottom: none; 
+}
+
+.menu a:hover {
+    color: #939090;
+}
+
+.menu ul.sub-menu li:hover a {
+    color: #000; 
+}
+
+.menu li:hover > .sub-menu {
+    display: flex; 
+    animation: fadeIn 0.3s ease-in-out; 
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px); 
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer {
+    height: 300px;
+    background-color: black;
+    color: white;
+    display: flex;
+}
+
+.cuoi {
+    background-color: rgb(65, 63, 63);
+}
+
+.trongcuoi {
+    width: 80%;
+    justify-content: center;
+    margin: 0 auto;
+    color: white;
+    line-height: 2.4;
+}
+
+.footer .a {
+    width: 80%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.khung2 h1 {
+    color: #eb983e;
+}
+
+th, td {
+    padding: 10px 0; 
+    text-align: left;
+}
+
+.footer a {
+    text-decoration: none;
+    color: white;
+}
+
+.footer .khung3 ul {
+    list-style-type: none;
+}
+
+.title-footer h3 {
+    color: #eb983e;
+}
+
+.footer .khung3 li {
+    margin: 10px 0;
+}
+
+.khung4 {
+    display: flex;
+}
+
+.khung4 img {
+    width: 30px;
+}
+
+.khung4_2 .cell-1-2 img {
+    width: 90px;
+}
+
+.khung4 .title-footer {
+    color: #eb983e;
+}
+
+.khung4_2 {
+    margin: 10px 10px;
+}
+
+.khung4_2 .linksmo {
+    padding: 5px 0;
+}
+
+/* phần viền */
+.vien {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.vien .content {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-content: center;
+    line-height: 2.0;
+}
+
+.vien .content > * {
+    margin-right: 2px;
+}
+
+.vien .content p, .vien .content .tc {
+    color: #6f6b6b;
+}
+
+.vien .content .lh {
+    color: #bb7326;
+}
+
+.vien a {
+    text-decoration: none;
+}
+
+/* Css phần body */
+.body {
+    background-image: url('./img/tuong.jpeg');
+    width: 100%;
+    height: 820px;
+    position: relative;
+    padding: 20px 0;
+}
+
+.lienhe {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 36px;
+    margin-bottom: 56px;
+}
+
+.lienhe h1 {
+    color: #eb983e;
+    font-size: 37px;
+}
+
+.line-title{
+    width: 750px
+
+}
+.form{
+    width: 730px;
+    height: 650px;
+    margin-left: 19%;
+}
+.contactform{
+    width: 750px;
+}
+
+.line-frm{
+    width: 750px;
+}
+.container_1 {
+    width: 84%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin-left: 8%;
+}
+
+.container2 {
+    display: flex;
+    justify-content: space-between;
+}
+ 
+
+.right, .left {
+    flex-basis: 48%;
+}
+
+.right .im {
+    width: 99%;
+    height: 100%;
+}
+
+.right img {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Test */
+.left {
+    margin: auto;
+    background: #F1F1F1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.frm {
+    padding: 0;
+    margin: 0;
+}
+
+.line-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.line-title span {
+    color: red;
+}
+
+.line-frm {
+    margin-bottom: 15px;
+}
+
+.txt-contact {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.txt-contact.error {
+    border-color: #FF0000;
+}
+
+textarea.txt-contact {
+    height: 95px;
+    resize: vertical;
+}
+
+input[type="text"].captcha-input {
+    width: 100px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.captcha-img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.btn-send {
+    display: inline-block;
+    background-color: #B08D57;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-send:hover {
+    background-color: #A07343;
+}
+
+.form_error {
+    display: none;
+    color: red;
+    margin-top: 10px;
+}
+
+.c5 {
+    clear: both;
+}
+
+#imgCaptcha {
+    padding-right: 3px;
+}
+
+.container2 {
+    justify-content: space-around;
+}
+
+
+.line-frm{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}

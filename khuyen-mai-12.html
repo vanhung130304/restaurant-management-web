@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán chương trình khuyến mãi - Nét Huế</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://pasgo.vn/Upload/anh-chi-tiet/nha-hang-net-hue-lang-ha-slide-9-normal-129904613475.webp') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #006699;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        .food-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .food-item {
+            width: 45%;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .food-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .food-item h2 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .food-item p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"], select, input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            border: 2px solid #006699;
+            border-radius: 5px;
+        }
+
+        .discount-box {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #006699;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        button {
+            background-color: #ff6600;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e65c00;
+        }
+
+        .home-btn {
+            background-color: #0066cc;
+            margin-left: 10px;
+        }
+
+        .home-btn:hover {
+            background-color: #005bb5;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .success-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .success-box h2 {
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .success-box p {
+            margin-bottom: 10px;
+        }
+
+        .close-btn {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nét Huế - Thanh Toán Chương Trình Khuyến Mãi</h1>
+
+        <div class="food-section">
+            <div class="food-item">
+                <img src="https://nethue.com.vn/uploaded/san%20pham/bun%20bo%20dac%20biet.jpg" alt="Bún Bò Huế Đặc Biệt">
+                <h2>Bún Bò Huế Đặc Biệt</h2>
+                <p>Giá: 88,000 VND</p>
+                <label for="quantity-bunbo">Số lượng:</label>
+                <input type="number" id="quantity-bunbo" value="1" min="1" max="10" onchange="updateTotal()">
+                <p><strong>Tổng tiền: </strong><span id="total-price-bunbo">88,000 VND</span></p>
+            </div>
+
+            <div class="food-item">
+                <img src="https://kenh14cdn.com/2019/1/27/chahue-05-15485276374871737391544.jpg" alt="Bún Bò Chả Huế">
+                <h2>Bún Bò Chả Huế</h2>
+                <p>Giá: 78,000 VND</p>
+                <label for="quantity-bunbocha">Số lượng:</label>
+                <input type="number" id="quantity-bunbocha" value="1" min="1" max="10" onchange="updateTotal()">
+                <p><strong>Tổng tiền: </strong><span id="total-price-bunbocha">78,000 VND</span></p>
+            </div>
+
+            <div class="food-item">
+                <img src="https://tiki.vn/blog/wp-content/uploads/2023/07/thumb.jpeg" alt="Bún Riêu Cua">
+                <h2>Bún Riêu Cua</h2>
+                <p>Giá: 70,000 VND</p>
+                <label for="quantity-bunrieu">Số lượng:</label>
+                <input type="number" id="quantity-bunrieu" value="1" min="1" max="10" onchange="updateTotal()">
+                <p><strong>Tổng tiền: </strong><span id="total-price-bunrieu">70,000 VND</span></p>
+            </div>
+
+            <div class="food-item">
+                <img src="https://huecity.gov.vn/Portals/0/Medias/Nam2021/T2/che%20hat%20sen.jpg" alt="Chè Huế">
+                <h2>Chè Huế - Khuyến mãi</h2>
+                <p>Giá: 0 VND (Tặng kèm khi mua 3 món)</p>
+                <label for="quantity-che">Số lượng:</label>
+                <input type="number" id="quantity-che" value="1" min="1" max="1" readonly>
+                <p><strong>Tổng tiền: </strong><span id="total-price-che">0 VND</span></p>
+            </div>
+        </div>
+
+        <div class="discount-box">
+            <label for="discount-code-select">Chọn hoặc nhập mã giảm giá:</label>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <select id="discount-code-select" onchange="applyDiscount()">
+                    <option value="none">Không chọn</option>
+                    <option value="GIAM10">GIAM10 - Giảm 10%</option>
+                    <option value="GIAM20">GIAM20 - Giảm 20%</option>
+                    <option value="FREESHIP">FREESHIP - Miễn phí vận chuyển</option>
+                    <option value="HUNG">HUNG - Giảm 50%</option>
+                </select>
+                <input type="text" id="discount-code-input" placeholder="Nhập mã giảm giá" oninput="applyDiscount()">
+            </div>
+        </div>
+
+        <label for="address">Địa chỉ giao hàng:</label>
+        <input type="text" id="address" placeholder="Nhập địa chỉ giao hàng" required>
+
+        <p><strong>Tổng tiền sau giảm: </strong><span id="final-price">236,000 VND</span></p>
+
+        <div>
+            <button onclick="thanhToan()">Đặt hàng</button>
+            <button class="home-btn" onclick="window.location.href='Trang_chu.html'">Về trang chủ</button>
+        </div>
+
+        <div class="success-box" id="success-box">
+            <h2>Đặt hàng thành công!</h2>
+            <p>Cảm ơn bạn đã đặt hàng tại Nét Huế.</p>
+            <p><strong>Thông tin đơn hàng:</strong></p>
+            <p id="order-summary"></p>
+            <button class="close-btn" onclick="closeSuccess()">Đóng</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Nét Huế. Tất cả quyền được bảo lưu.
+    </footer>
+
+    <script>
+        let finalPrice = 236000;
+
+        function updateTotal() {
+            const bunboQty = parseInt(document.getElementById("quantity-bunbo").value);
+            const bunbochaQty = parseInt(document.getElementById("quantity-bunbocha").value);
+            const bunrieuQty = parseInt(document.getElementById("quantity-bunrieu").value);
+            const cheQty = parseInt(document.getElementById("quantity-che").value);
+
+            const priceBunbo = 88000;
+            const priceBunbocha = 78000;
+            const priceBunrieu = 70000;
+
+            const totalBunbo = bunboQty * priceBunbo;
+            const totalBunbocha = bunbochaQty * priceBunbocha;
+            const totalBunrieu = bunrieuQty * priceBunrieu;
+
+            document.getElementById("total-price-bunbo").innerText = totalBunbo.toLocaleString('vi-VN') + ' VND';
+            document.getElementById("total-price-bunbocha").innerText = totalBunbocha.toLocaleString('vi-VN') + ' VND';
+            document.getElementById("total-price-bunrieu").innerText = totalBunrieu.toLocaleString('vi-VN') + ' VND';
+
+            finalPrice = totalBunbo + totalBunbocha + totalBunrieu;
+            document.getElementById("final-price").innerText = finalPrice.toLocaleString('vi-VN') + ' VND';
+        }
+
+        function applyDiscount() {
+            const discountCodeSelect = document.getElementById("discount-code-select").value;
+            const discountCodeInput = document.getElementById("discount-code-input").value;
+            let discountAmount = 0;
+
+            if (discountCodeSelect !== "none") {
+                if (discountCodeSelect === "GIAM10") {
+                    discountAmount = finalPrice * 0.1;
+                } else if (discountCodeSelect === "GIAM20") {
+                    discountAmount = finalPrice * 0.2;
+                } else if (discountCodeSelect === "FREESHIP") {
+                    discountAmount = 5000; // Giả định 5000 VND
+                } else if (discountCodeSelect === "HUNG") {
+                    discountAmount = finalPrice * 0.5;
+                }
+            }
+
+            if (discountCodeInput === "HAPPY") {
+                discountAmount += finalPrice * 0.1; // Giảm thêm 10%
+            }
+
+            finalPrice -= discountAmount;
+            document.getElementById("final-price").innerText = finalPrice.toLocaleString('vi-VN') + ' VND';
+        }
+
+        function thanhToan() {
+            const address = document.getElementById("address").value;
+            const orderSummary = `
+                - Bún Bò Huế Đặc Biệt: ${document.getElementById("quantity-bunbo").value} x 88,000 VND
+                - Bún Bò Chả Huế: ${document.getElementById("quantity-bunbocha").value} x 78,000 VND
+                - Bún Riêu Cua: ${document.getElementById("quantity-bunrieu").value} x 70,000 VND
+                - Chè Huế: ${document.getElementById("quantity-che").value} x 0 VND
+                - Địa chỉ giao hàng: ${address}
+                - Tổng tiền: ${finalPrice.toLocaleString('vi-VN')} VND
+            `;
+            document.getElementById("order-summary").innerText = orderSummary;
+            document.getElementById("success-box").style.display = "block";
+        }
+
+        function closeSuccess() {
+            document.getElementById("success-box").style.display = "none";
+        }
+    </script>
+</body>
+</html>

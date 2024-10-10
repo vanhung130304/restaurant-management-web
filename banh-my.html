@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán món Bánh Mỳ - Nét Huế</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://pasgo.vn/Upload/anh-chi-tiet/nha-hang-net-hue-lang-ha-slide-9-normal-129904613475.webp') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #006699;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        .food-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .food-image {
+            width: 300px;
+            height: auto;
+            border-radius: 8px;
+            border: 4px solid #006699;
+        }
+
+        .food-info {
+            text-align: left;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .food-info h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .food-info p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            border: 2px solid #006699;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #ff6600;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e65c00;
+        }
+
+        .home-btn {
+            background-color: #0066cc;
+            margin-left: 10px;
+        }
+
+        .home-btn:hover {
+            background-color: #005bb5;
+        }
+
+        .suggestions {
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            margin-right: 15px;
+            border: 3px solid #006699;
+        }
+
+        .menu-item h3 {
+            font-size: 18px;
+            color: #006699;
+        }
+
+        .menu-item p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .discount-box {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #006699;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Styles for success modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .order-summary {
+            text-align: left;
+        }
+
+        .order-summary p {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nét Huế - Thanh Toán Món Bánh Mỳ</h1>
+        <div class="food-section">
+            <img src="https://thanhnien.mediacdn.vn/uploaded/giangvu/2020_03_24/banhmiphalau5_NNPD.jpg?width=500" alt="Bánh Mỳ" class="food-image">
+            <div class="food-info">
+                <h2 id = "food-name">Bánh Mỳ</h2>
+                <p>Bánh mỳ thơm giòn, hấp dẫn.</p>
+                <p><strong>Giá: 25,000 VND</strong></p>
+                <label for="quantity">Số lượng: </label>
+                <input type="number" id="quantity" value="1" min="1" max="10">
+                <p><strong>Tổng tiền: </strong><span id="total-price">25,000 VND</span></p>
+                
+                <div class="discount-box">
+                    <label for="discount-code-select">Chọn hoặc nhập mã giảm giá:</label>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <select id="discount-code-select">
+                            <option value="none">Không chọn</option>
+                            <option value="GIAM10">GIAM10 - Giảm 10%</option>
+                            <option value="GIAM20">GIAM20 - Giảm 20%</option>
+                            <option value="FREESHIP">FREESHIP - Miễn phí vận chuyển</option>
+                            <option value="HUNG">HUNG - Giảm 50%</option>
+                        </select>
+                        <input type="text" id="discount-code-input" placeholder="Nhập mã giảm giá" oninput="applyDiscount()">
+                    </div>
+                </div>
+
+                <p><strong>Tổng tiền sau giảm: </strong><span id="final-price">25,000 VND</span></p>
+                
+                <label for="address">Nhập địa chỉ giao hàng:</label>
+                <input type="text" id="address" placeholder="Nhập địa chỉ của bạn...">
+                <button id = "thanhtoan-btn">Đặt hàng ngay</button>
+                <button class="home-btn" id = "home-btn">Home</button>
+            </div>
+        </div>
+
+        <div class="suggestions">
+            <h2>Món khác</h2>
+
+            <!-- Món 1 -->
+            <div class="menu-item">
+                <img src="https://images2.thanhnien.vn/zoom/686_429/Uploaded/nguyenvan/2022_11_03/chao-ca-loc-rau-dang-dat-9538.jpg" alt="Cháo Cá Lóc">
+                <div>
+                    <h3>Cháo Cá Lóc</h3>
+                    <p>Món cháo cá lóc đậm đà, thơm ngon.</p>
+                    <div class="price">65,000 VND</div>
+                    <button>Đặt món</button>
+                </div>
+            </div>
+
+            <!-- Món 2 -->
+            <div class="menu-item">
+                <img src="https://kinhdoamthuc.com/wp-content/uploads/2023/07/bun-bo-gio-heo-ngon-dam-da.jpg" alt="Bún Huế Giò Heo">
+                <div>
+                    <h3>Bún Huế Giò Heo</h3>
+                    <p>Thơm lừng hương vị truyền thống, đậm đà.</p>
+                    <div class="price">45,000 VND</div>
+                    <button>Đặt món</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id = "close-btn">&times;</span>
+            <h2>Đặt hàng thành công!</h2>
+            <div class="order-summary">
+                <p><strong>Tên món:</strong> Bánh Mỳ</p>
+                <p><strong>Số lượng:</strong> <span id="order-quantity">1</span></p>
+                <p><strong>Tổng tiền:</strong> <span id="order-total-price">25,000 VND</span></p>
+                <p><strong>Địa chỉ giao hàng:</strong> <span id="order-address"></span></p>
+            </div>
+            <p>Cảm ơn quý khách đã đặt hàng tại Nét Huế!</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Nét Huế. Mọi quyền được bảo lưu.</p>
+    </footer>
+
+    <script type = "module">
+        document.getElementById("quantity").addEventListener("change", updateTotal);
+        document.getElementById("discount-code-select").addEventListener("change", applyDiscount);
+        document.getElementById("discount-code-input").addEventListener("change", applyDiscount);
+        const ThanhToan_btn = document.getElementById("thanhtoan-btn");
+        document.getElementById("home-btn").addEventListener("click", quayVeTrangChu);
+        const price = 88000;
+        var modal = document.getElementById('success-modal');
+        const closeBtn = document.getElementById('close-btn');
+        closeBtn.onclick = closeModal;
+
+
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js';
+        import { getAuth } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
+        import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js';
+        import { collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js';
+
+        let firebaseConfig = {
+            apiKey: "AIzaSyDfgWRy7bLoMaoH-4XEd6RRjVADeSUG8sY",
+            authDomain: "nethue-ktpm.firebaseapp.com",
+            projectId: "nethue-ktpm",
+            storageBucket: "nethue-ktpm.appspot.com",
+            messagingSenderId: "923818382455",
+            appId: "1:923818382455:web:a7583381f3c3b211e66272",
+            measurementId: "G-G81N2NNXDF"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app)
+
+        ThanhToan_btn.addEventListener("click", async (e) => {
+            e.preventDefault();
+        
+            const food_name = document.getElementById("food-name").innerText;
+            const address = document.getElementById("address").value;
+            const final_price = document.getElementById("final-price").innerText;
+            const discount_code_input = document.getElementById("discount-code-input").value;
+            const discount_code_select = document.getElementById("discount-code-select").value;
+            const quantity = parseInt(document.getElementById("quantity").value);
+        
+            if (!address) {
+                alert("Vui lòng nhập địa chỉ giao hàng");
+                return;
+            }
+        
+            try {
+                // Get the current number of orders
+                const ordersSnapshot = await getDocs(collection(db, "orders"));
+                const orderCount = ordersSnapshot.size; // The number of orders
+        
+                // Use the count + 1 as the new order index
+                const newOrderId = (orderCount + 1).toString();
+        
+                // Save the order with the new index as the ID
+                await setDoc(doc(db, "orders", newOrderId), {
+                    id: newOrderId,
+                    food_name: food_name,
+                    price: price, 
+                    quantity: quantity,
+                    discount_code_input: discount_code_input,
+                    discount_code_select: discount_code_select,
+                    final_price: final_price,
+                    address: address,
+                });
+        
+                modal.style.display = 'block';
+        
+            } catch (error) {
+                console.error("Error creating order: ", error);
+            }
+        });
+
+    
+        function updateTotal() {
+            var price = 25000;
+            var quantity = document.getElementById('quantity').value;
+            var totalPrice = price * quantity;
+            document.getElementById('total-price').innerText = totalPrice.toLocaleString('vi-VN') + ' VND';
+            document.getElementById('final-price').innerText = totalPrice.toLocaleString('vi-VN') + ' VND';
+        }
+
+        function applyDiscount() {
+            var discountSelect = document.getElementById('discount-code-select');
+            var discountCodeInput = document.getElementById('discount-code-input').value.toUpperCase();
+            var discountCode = discountCodeInput || discountSelect.value;
+            var price = 25000;
+            var quantity = document.getElementById('quantity').value;
+            var totalPrice = price * quantity;
+
+            var discount = 0;
+
+            if (discountCode === 'GIAM10') {
+                discount = 0.1;
+            } else if (discountCode === 'GIAM20') {
+                discount = 0.2;
+            } else if (discountCode === 'HUNG') {
+                discount = 0.5;
+            }
+
+            var finalPrice = totalPrice * (1 - discount);
+            document.getElementById('final-price').innerText = finalPrice.toLocaleString('vi-VN') + ' VND';
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('success-modal');
+            modal.style.display = 'none';
+            quayVeTrangChu();
+        }
+
+        function quayVeTrangChu() {
+            window.location.href = 'Trang_Chu.html';
+        }
+    </script>
+</body>
+</html>

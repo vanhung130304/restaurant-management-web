@@ -1,0 +1,453 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+.form {
+    width: 1500px;
+    height: auto;
+    background-color: burlywood;
+}
+
+header {
+    height: 520px;
+    background-image: url('./img/Anh_nen.png');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.baner {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ngonngu, .search {
+    display: flex;
+    align-items: center;
+}
+
+.ngonngu h3, .search h3 {
+    margin-left: 5px;
+}
+.grayimg{
+    width: 100%;
+    height: 300px;
+}
+.grayimg img{
+    width: 100%;
+    height: 300px;
+}
+.title h1{
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+.title {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+
+
+}
+.content{
+    padding: 10px 0px;
+}
+.ct{
+    width: 1280px;
+    height: 950px;
+    margin: 10px 50px;
+    font-size: 15px;
+}
+.where{
+    margin-left: 40px;
+}
+.title a{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 40px;
+    color: #d5a34c;
+
+}
+.trangchu-tuyendung{
+    width: 100%;
+    height: 37px;
+    margin-left: 100px;
+}
+.trangchu-tuyendung a:last-child{
+    color: #d5a34c;
+}   
+.trangchu-tuyendung{
+    width: 100%;
+    height: 37px;
+    margin-left: 100px;
+}
+.trangchu-tuyendung a:last-child{
+    color: #d5a34c;
+}
+.tuyendung{
+    width: 90%;
+    margin: 0 auto;
+}
+.c10 {
+    height: 10px;
+}
+a{
+    text-decoration: none;
+    color: #6f6f6f;
+}
+.ngonngu img {
+    width: 20px;
+    height: auto;
+    border-radius: 50%;
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+}
+
+.search h3 {
+    margin: 0 5px;
+}
+
+.menu {
+    width: 80%;
+    height: 55px;
+    background-image: url('./img/nen2.png'); 
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: 50px;
+    position: absolute;
+    justify-content: space-between; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    top: 100px;
+}
+
+.main-menu {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    justify-content: center; 
+}
+
+.main-menu li {
+    margin: 0 15px;
+    position: relative;
+    display: flex;
+    align-items: center; 
+}
+
+.menu a {
+    color: black;
+    text-decoration: none;
+}
+
+.Datban {
+    background-color: #eb983e;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.Datban a h3 {
+    color: white;
+    margin: 0;
+}
+
+.menu ul.sub-menu {
+    position: absolute;
+    top: 100%; 
+    left: 0; 
+    display: none;
+}
+
+.menu ul.sub-menu {
+    position: absolute;
+    background-image: url('./img/tuong.jpeg');
+    list-style-type: none;
+    padding: 10px 0;
+    width: 200px;
+    text-align: left;
+    font-size: 11px;
+    display: none; 
+    flex-direction: column;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.menu ul.sub-menu li {
+    padding: 8px 10px; 
+    border-bottom: 1px solid #787171;
+}
+
+.menu ul.sub-menu li:last-child {
+    border-bottom: none; 
+}
+
+.menu a:hover {
+    color: #939090;
+}
+
+.menu ul.sub-menu li:hover a {
+    color: #000; 
+    border-bottom: none; 
+}
+
+.menu li:hover > .sub-menu {
+    display: flex; 
+    animation: fadeIn 0.3s ease-in-out; 
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px); 
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.menu li {
+    position: relative;
+}
+
+
+
+.footer{
+    height: 300px;
+    background-color: black;
+    color: white;
+    display: flex;
+}
+
+.cuoi{
+    background-color: rgb(65, 63, 63);
+}
+.trongcuoi{
+    width: 80%;
+    justify-content: center;
+    margin: 0 auto;
+    color: white;
+    line-height: 2.4;
+}
+
+.footer .a{
+    width: 80%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+    
+    
+}
+
+.khung2 h1{
+    color: #eb983e;
+}
+
+th, td {
+    padding:10px 0; 
+    text-align: left;
+}
+
+.footer a{
+    text-decoration: none;
+    color: white;
+}
+
+.footer .khung3 ul{
+    list-style-type: none;
+}
+
+.title-footer h3{
+    color: #eb983e;
+}
+
+.footer .khung3 li{
+    margin: 10px 0;
+}
+
+.khung4{
+    display: flex;
+}
+
+.khung4 img{
+    width: 30px;
+}
+ 
+.khung4_2 .cell-1-2 img{
+    width: 90px;
+}
+
+.khung4 .title-footer{
+    color: #eb983e;
+}
+
+.khung4_2{
+    margin: 10px 10px;
+}
+
+.khung4_2 .linksmo{
+    padding:5px 0;
+}
+
+
+/* Css phần body6 */
+.body6{
+    width: 100%;
+    background-image: url('./img/Anh_nen.png');
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 30px 0;
+}
+
+.body6 a{
+    text-decoration: none;
+}
+
+.body6 .grid{
+    width: 60%;
+    margin: 0 auto;
+    background-color: white;
+}
+
+
+.Hethong {
+    background-color: #C69C62; 
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    height: 50px; 
+}
+
+.title {
+    font-size: 24px; 
+    color: white; 
+    font-weight: bold;
+}
+
+.find-nearby button {
+    background-color: white; 
+    color: #C69C62; 
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.find-nearby button::before {
+    content: '📍'; 
+    margin-right: 5px; 
+}
+
+
+.find-nearby button:hover {
+    background-color: #FFD700; 
+    color: white;
+}
+
+
+.box-list-map {
+    max-height: 500px; 
+    overflow-y: auto; 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+}
+
+
+
+.box-list-map::-webkit-scrollbar {
+    width: 10px; 
+}
+
+.box-list-map::-webkit-scrollbar-thumb {
+    background: #ac7323; 
+    border-radius: 5px; 
+}
+
+.box-list-map::-webkit-scrollbar-thumb:hover {
+    background: #ecbe25; 
+}
+
+.box-list-map::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+
+
+.item-map {
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+.item-map.active {
+    background-color: #f0f0f0;
+    border-color: #999;
+}
+
+.item-map .name{
+    color: #ac7323;
+}
+
+:root {
+    --current-font-size: 16px;
+}
+
+
+.box-list-map div,
+.box-list-map table,
+.box-list-map td,
+.box-list-map .name {
+    font-size: calc(var(--current-font-size) - 3px) !important;
+}
+
+/* Bổ sung Css */
+.ngonngu img {
+    border: 0px solid black; 
+    background-color: white; 
+    padding: 2px; 
+    border-radius: 5px; 
+}
+
+.ngonngu img {
+    width: 30px;
+    height: auto;
+    border-radius: 50%;
+}
+

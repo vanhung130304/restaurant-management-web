@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán món Lẩu Cua Đồng - Nét Huế</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://pasgo.vn/Upload/anh-chi-tiet/nha-hang-net-hue-lang-ha-slide-9-normal-129904613475.webp') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #006699;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        .food-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .food-image {
+            width: 300px;
+            height: auto;
+            border-radius: 8px;
+            border: 4px solid #006699;
+        }
+
+        .food-info {
+            text-align: left;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .food-info h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .food-info p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            border: 2px solid #006699;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #ff6600;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e65c00;
+        }
+
+        .home-btn {
+            background-color: #0066cc;
+            margin-left: 10px;
+        }
+
+        .home-btn:hover {
+            background-color: #005bb5;
+        }
+
+        .suggestions {
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            margin-right: 15px;
+            border: 3px solid #006699;
+        }
+
+        .menu-item h3 {
+            font-size: 18px;
+            color: #006699;
+        }
+
+        .menu-item p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .discount-box {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #006699;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Styles for success modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nét Huế - Thanh Toán Món Lẩu Cua Đồng</h1>
+        <div class="food-section">
+            <img src="https://tiki.vn/blog/wp-content/uploads/2023/07/thumb-10.jpg" alt="Lẩu Cua Đồng" class="food-image">
+            <div class="food-info">
+                <h2>Lẩu Cua Đồng</h2>
+                <p>Món lẩu cua đồng tươi ngon, hấp dẫn với hương vị đậm đà.</p>
+                <p><strong>Giá: 150,000 VND</strong></p>
+                <label for="quantity">Số lượng: </label>
+                <input type="number" id="quantity" value="1" min="1" max="10" onchange="updateTotal()">
+                <p><strong>Tổng tiền: </strong><span id="total-price">150,000 VND</span></p>
+                
+                <div class="discount-box">
+                    <label for="discount-code-select">Chọn hoặc nhập mã giảm giá:</label>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <select id="discount-code-select" onchange="applyDiscount()">
+                            <option value="none">Không chọn</option>
+                            <option value="GIAM10">GIAM10 - Giảm 10%</option>
+                            <option value="GIAM20">GIAM20 - Giảm 20%</option>
+                            <option value="FREESHIP">FREESHIP - Miễn phí vận chuyển</option>
+                            <option value="HUNG">HUNG - Giảm 50%</option>
+                        </select>
+                        <input type="text" id="discount-code-input" placeholder="Nhập mã giảm giá" oninput="applyDiscount()">
+                    </div>
+                </div>
+
+                <p><strong>Tổng tiền sau giảm: </strong><span id="final-price">150,000 VND</span></p>
+                
+                <label for="address">Nhập địa chỉ giao hàng:</label>
+                <input type="text" id="address" placeholder="Nhập địa chỉ của bạn...">
+                <button onclick="thanhToan()">Đặt hàng ngay</button>
+                <button class="home-btn" onclick="quayVeTrangChu()">Home</button>
+            </div>
+        </div>
+
+        <div class="suggestions">
+            <h2>Món khác</h2>
+
+            <!-- Món 1 -->
+            <div class="menu-item">
+                <img src="https://cdn.sgtiepthi.vn/wp-content/uploads/2023/07/CA-TRAU-NAU-CHAO-DAU-XANH-2-Custom.jpg" alt="Cháo Cá Lóc">
+                <div>
+                    <h3>Cháo Cá Lóc</h3>
+                    <p>Món cháo cá lóc đậm đà, thơm ngon.</p>
+                    <div class="price">65,000 VND</div>
+                    <button>Đặt món</button>
+                </div>
+            </div>
+
+            <!-- Món 2 -->
+            <div class="menu-item">
+                <img src="https://vcdn1-dulich.vnecdn.net/2016/04/28/Anh1-2283-1461811111.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=z1Y0-mQ_8XM7iQQfaidQhw" alt="Bún Riêu Cua">
+                <div>
+                    <h3>Bún Riêu Cua</h3>
+                    <p>Món bún riêu cua thanh mát, chua chua, cay cay.</p>
+                    <div class="price">70,000 VND</div>
+                    <button>Đặt món</button>
+                </div>
+            </div>
+
+            <!-- Món 3 -->
+            <div class="menu-item">
+                <img src="https://vifoodshop.com/wp-content/uploads/2019/07/nem-chua-chuan-thanh-hoa.jpg" alt="Nem Chua">
+                <div>
+                    <h3>Nem Chua</h3>
+                    <p>Món nem chua nướng nóng hổi, ngon tuyệt.</p>
+                    <div class="price">80,000 VND</div>
+                    <button>Đặt món</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Nét Huế. Tất cả quyền được bảo lưu.</p>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Cảm ơn bạn!</h2>
+            <p>Đơn hàng của bạn đã được đặt thành công!</p>
+            <p><strong>Tổng tiền:</strong> <span id="modal-final-price"></span></p>
+            <p>Địa chỉ giao hàng: <span id="modal-address"></span></p>
+            <button onclick="closeModal()">Đóng</button>
+        </div>
+    </div>
+
+    <script>
+        function updateTotal() {
+            var quantity = document.getElementById("quantity").value;
+            var pricePerUnit = 150000;
+            var totalPrice = quantity * pricePerUnit;
+            document.getElementById("total-price").innerText = totalPrice.toLocaleString() + " VND";
+            document.getElementById("final-price").innerText = totalPrice.toLocaleString() + " VND";
+        }
+
+        function applyDiscount() {
+            var totalPrice = parseInt(document.getElementById("total-price").innerText.replace(/,/g, ''), 10);
+            var discountCode = document.getElementById("discount-code-select").value;
+            var discountInput = document.getElementById("discount-code-input").value.trim();
+
+            var finalPrice = totalPrice;
+
+            if (discountCode === "GIAM10" || discountInput === "GIAM10") {
+                finalPrice *= 0.9; // Giảm 10%
+            } else if (discountCode === "GIAM20" || discountInput === "GIAM20") {
+                finalPrice *= 0.8; // Giảm 20%
+            } else if (discountCode === "FREESHIP" || discountInput === "FREESHIP") {
+                // Giảm phí vận chuyển, giữ nguyên giá
+            } else if (discountCode === "HUNG" || discountInput === "HUNG") {
+                finalPrice *= 0.5; // Giảm 50%
+            }
+
+            document.getElementById("final-price").innerText = Math.round(finalPrice).toLocaleString() + " VND";
+        }
+
+        function thanhToan() {
+            var finalPrice = document.getElementById("final-price").innerText;
+            var address = document.getElementById("address").value;
+
+            document.getElementById("modal-final-price").innerText = finalPrice;
+            document.getElementById("modal-address").innerText = address;
+
+            var modal = document.getElementById("success-modal");
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("success-modal");
+            modal.style.display = "none";
+        }
+
+        function quayVeTrangChu() {
+            window.location.href = "file:///C:/Users/Admin/Documents/Bai_tap_lon_web/nethue_KTPM/Trang_Chu.html"; // Đường dẫn về trang chủ của bạn
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("success-modal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

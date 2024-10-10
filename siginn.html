@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập, Đăng Ký và Đăng Xuất</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('https://nethue.com.vn/uploaded/tin-tuc-khampha-1.jpg'); /* Đường dẫn đến hình nền nét Huế */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Nền trắng có độ trong suốt */
+            padding: 30px;
+            
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        
+input[type="text"],
+input[type="password"] {
+    width: 90%; /* Chiều rộng 90% để tạo khoảng cách bên trái và bên phải */
+    padding: 10px; /* Khoảng cách bên trong */
+    margin: 10px 0; /* Khoảng cách bên ngoài */
+    border: 1px solid #ccc; /* Đường viền */
+    border-radius: 4px; /* Bo góc */
+    font-size: 16px; /* Kích thước chữ */
+    transition: border-color 0.3s; /* Hiệu ứng chuyển tiếp cho đường viền */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #66afe9; /* Màu viền khi focus */
+    outline: none; /* Loại bỏ đường viền mặc định */
+}
+
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Bảng thông báo */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .modal p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .modal button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+<div id="loginForm" class="container">
+    <h2>Đăng Nhập</h2>
+    <input type="text" id="loginUsername" placeholder="Tên đăng nhập" required>
+    <input type="password" id="loginPassword" placeholder="Mật khẩu" required>
+    <button onclick="login()">Đăng Nhập</button>
+    <p>Bạn chưa có tài khoản? <a href="#" onclick="showRegister()">Đăng ký tại đây</a></p>
+</div>
+
+<div id="registerForm" class="container hidden">
+    <h2>Đăng Ký</h2>
+    <input type="text" id="registerUsername" placeholder="Tên đăng nhập" required>
+    <input type="password" id="registerPassword" placeholder="Mật khẩu" required>
+    <button onclick="register()">Đăng Ký</button>
+    <p>Bạn đã có tài khoản? <a href="#" onclick="showLogin()">Đăng nhập tại đây</a></p>
+</div>
+
+<div id="logoutForm" class="container hidden">
+    <h2>Chào mừng, <span id="usernameDisplay"></span>!</h2>
+    <button onclick="logout()">Đăng Xuất</button>
+</div>
+
+<!-- Bảng thông báo -->
+<div id="notificationModal" class="modal">
+    <p id="notificationMessage"></p>
+    <button onclick="closeModal()">OK</button>
+</div>
+
+<script>
+    // Lấy dữ liệu người dùng từ localStorage
+    function getUsers() {
+        return JSON.parse(localStorage.getItem('users')) || {};
+    }
+
+    // Lưu người dùng vào localStorage
+    function saveUsers(users) {
+        localStorage.setItem('users', JSON.stringify(users));
+    }
+
+    function showLogin() {
+        document.getElementById('loginForm').classList.remove('hidden');
+        document.getElementById('registerForm').classList.add('hidden');
+    }
+
+    function showRegister() {
+        document.getElementById('loginForm').classList.add('hidden');
+        document.getElementById('registerForm').classList.remove('hidden');
+    }
+
+    function login() {
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+        const users = getUsers();
+
+        if (users[username] && users[username] === password) {
+            showNotification('Đăng nhập thành công!');
+            sessionStorage.setItem("username", username);
+            window.location.href = "Trang_Chu.html";
+        } else {
+            showNotification('Tên đăng nhập hoặc mật khẩu không đúng!');
+        }
+    }
+
+    function register() {
+        const username = document.getElementById('registerUsername').value;
+        const password = document.getElementById('registerPassword').value;
+        const users = getUsers();
+
+        if (username && password) {
+            if (users[username]) {
+                showNotification('Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.');
+            } else {
+                users[username] = password;
+                saveUsers(users);
+                showNotification('Đăng ký thành công! Bây giờ bạn có thể đăng nhập.');
+                showLogin();
+            }
+        } else {
+            showNotification('Vui lòng điền đầy đủ thông tin!');
+        }
+    }
+
+    function logout() {
+        showNotification('Bạn đã đăng xuất!');
+        sessionStorage.removeItem("username");
+        document.getElementById('logoutForm').classList.add('hidden');
+        document.getElementById('loginForm').classList.remove('hidden');
+    }
+
+    // Hàm hiển thị bảng thông báo
+    function showNotification(message) {
+        document.getElementById('notificationMessage').textContent = message;
+        document.getElementById('notificationModal').style.display = 'block';
+    }
+
+    // Hàm đóng bảng thông báo
+    function closeModal() {
+        document.getElementById('notificationModal').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

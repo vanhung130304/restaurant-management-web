@@ -1,0 +1,674 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+.container{
+    position: relative;
+}
+
+.form {
+    width: 1500px;
+    height: auto;
+    background-color: burlywood;
+}
+
+header {
+    height: 750px;
+    background-image: url('./img/Anh_nen2.png');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.baner {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ngonngu, .search {
+    display: flex;
+    align-items: center;
+}
+
+.ngonngu h3, .search h3 {
+    margin-left: 5px;
+}
+
+.ngonngu img {
+    border: 0px solid black; 
+    background-color: white; 
+    padding: 2px; 
+    border-radius: 5px; 
+}
+
+.ngonngu img {
+    width: 30px;
+    height: auto;
+    border-radius: 50%;
+}
+
+
+header a {
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+}
+
+.search h3 {
+    margin: 0 5px;
+}
+
+.menu {
+    width: 80%;
+    height: 55px;
+    background-image: url('./img/nen2.png'); 
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: 50px;
+    position: absolute;
+    justify-content: space-between; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    top: 100px;
+}
+
+.main-menu {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    justify-content: center; 
+}
+
+.main-menu li {
+    margin: 0 15px;
+    position: relative;
+    display: flex;
+    align-items: center; 
+}
+
+.menu a {
+    color: black;
+    text-decoration: none;
+}
+
+.Datban {
+    background-color: #eb983e;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.Datban a h3 {
+    color: white;
+    margin: 0;
+}
+
+.menu ul.sub-menu {
+    position: absolute;
+    top: 100%; 
+    left: 0; 
+    display: none;
+}
+
+.menu ul.sub-menu {
+    position: absolute;
+    background-image: url('./img/tuong.jpeg');
+    list-style-type: none;
+    padding: 10px 0;
+    width: 200px;
+    text-align: left;
+    font-size: 11px;
+    display: none; 
+    flex-direction: column;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.menu ul.sub-menu li {
+    padding: 8px 10px; 
+    border-bottom: 1px solid #787171;
+}
+
+.menu ul.sub-menu li:last-child {
+    border-bottom: none; 
+}
+
+.menu a:hover {
+    color: #939090;
+}
+
+.menu ul.sub-menu li:hover a {
+    color: #000; 
+    border-bottom: none; 
+}
+
+.menu li:hover > .sub-menu {
+    display: flex; 
+    animation: fadeIn 0.3s ease-in-out; 
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px); 
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.menu li {
+    position: relative;
+}
+
+
+
+/* Css phần body1 */
+.body1{
+    width: 100%;
+    height: 500px;
+    background-image: url('./img/nen2.png');
+}
+
+/* Css phần body2 */
+.body2{
+    width: 100%;
+    background-image: url('./img/nen2.png');
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 30px 0;
+}
+
+.body2 a{
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.body2 .product-price-home{
+    font-weight: bold;
+    color: rgb(215, 86, 86);
+}
+
+.body2 .btn-order-c{
+    color: rgb(209, 174, 50)
+
+}
+
+
+.body2 .title-home{
+    text-align: center;
+    font-size: 40px;
+    margin: 10px 0;
+}
+
+.body2 .title-home a{
+    color: #eb983e;
+}
+
+
+.body2 .title-home::before,.body2 .title-home::after {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900; 
+    color: #eb983e; 
+    font-size: 36px; 
+    margin-right: 10px; 
+    margin-left: 10px; 
+    position: absolute;
+}
+
+.body2 .title-home::before {
+    content: "___•"; 
+    left: 400px;
+}
+
+.body2 .title-home::after {
+    content: "•___"; 
+    right: 400px;
+}
+
+.body2-container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.body2 .flex-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+.body2 .cell-1-4{
+    width: 270px;
+    padding: 13px;
+    margin: 20px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.body2 .cell-1-4:hover{
+    background-color: white;
+}
+
+.body2 .vc{
+    padding: 10px 20px;
+    background-color: #ffffff; 
+    color: #D4A252; 
+    border: 2px solid #D4A252;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    border-radius: 20px;
+}
+
+.body2 .cell-1-4:hover .vc {
+    background-color: #D4A252;
+    
+}
+
+.body2 .cell-1-4:hover .btn-order-c{
+    color: white;
+}
+
+/* Css phần body 3 */
+
+.body3{
+    width: 100%;
+    height: 500px;
+    background-image: url('./img/Anh_ban.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 30px 0;
+    position: relative;
+}
+
+.body3 .box-about-home{
+    width: 720px;
+    margin: auto;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 20px; 
+    border-radius: 8px;
+    position: absolute;
+    bottom: 90px;
+    left: 300px;
+    
+
+}
+
+.body3 .box-text div{
+    font-size: 14px;
+}
+
+.body3 .box-text .title-about-home{
+    font-family: 'Arial', sans-serif; 
+  font-size: 36px; 
+  color: #d5a34c; 
+  text-transform: uppercase; 
+  letter-spacing: 2px; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+  
+}
+
+
+.body3 .box-text{
+    padding: 10px;
+    border: 1px solid #d5a34c;
+    border-radius: 4px;
+}
+
+.body3 img{
+    width: 80%;
+    border-radius: 100%;
+}
+
+.body3 .imga1 {
+    
+    position: absolute;
+    bottom: 20px;
+    right: 300px;
+}
+
+.body3 .imga2 {
+    
+    position: absolute;
+    top: 70px;
+    right: 180px;
+}
+
+.body5 .title-home{
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.body5 .title-home::before,.body5 .title-home::after {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900; 
+    color: #eb983e; 
+    font-size: 36px; 
+    margin-right: 10px; 
+    margin-left: 10px; 
+    position: absolute;
+}
+
+.body5 .title-home::before {
+    content: "\f30b"; 
+    left: 400px;
+}
+
+.body5 .title-home::after {
+    content: "\f30a"; 
+    right: 400px;
+}
+
+.body5 .title-home {
+    padding-left: 0px; 
+    padding-right: 0px;
+}
+
+
+/* Css phàn boby5 */
+
+.body5{
+    width: 100%;
+    background-image: url('./img/nen2.png');
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 30px 0;
+}
+
+.body5 .grid{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.body5 a{
+    text-decoration: none;
+}
+
+.body5 .title-home{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin:10px 0 ;
+
+}
+
+.body5 .title-home a{
+    font-size: 36px;
+    color: #eb983e;
+    
+
+}
+
+.body5 .c20{
+    padding: 10px 0;
+}
+
+.body5 .flex-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.body5 .cell-1-3{
+    flex: 1;
+    flex-basis: 30%;
+    margin: 5px;
+    padding: 10px;
+}
+
+.body5 .flex-container a{
+    color: black;
+    font-size: 17px;
+}
+
+.body5 .createdate-home{
+    color: #999;
+}
+
+.body5 .createdate-home::before{
+    content: "•"; 
+    color: black; 
+    font-weight: bold; 
+    margin-right: 5px; 
+    color: #999;
+}
+
+.body5 div{
+    color: #424040;
+}
+
+/* Css phần body6 */
+.body6{
+    width: 100%;
+    background-image: url('./img/Anh_nen.png');
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 30px 0;
+}
+
+.body6 a{
+    text-decoration: none;
+}
+
+.body6 .grid{
+    width: 60%;
+    margin: 0 auto;
+    background-color: white;
+}
+
+
+.Hethong {
+    background-color: #C69C62; 
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    height: 50px; 
+}
+
+.title {
+    font-size: 24px; 
+    color: white; 
+    font-weight: bold;
+}
+
+.find-nearby button {
+    background-color: white; 
+    color: #C69C62; 
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.find-nearby button::before {
+    content: '📍'; 
+    margin-right: 5px; 
+}
+
+
+.find-nearby button:hover {
+    background-color: #FFD700; 
+    color: white;
+}
+
+
+.box-list-map {
+    max-height: 500px; 
+    overflow-y: auto; 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+}
+
+
+
+.box-list-map::-webkit-scrollbar {
+    width: 10px; 
+}
+
+.box-list-map::-webkit-scrollbar-thumb {
+    background: #ac7323; 
+    border-radius: 5px; 
+}
+
+.box-list-map::-webkit-scrollbar-thumb:hover {
+    background: #ecbe25; 
+}
+
+.box-list-map::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+
+
+.item-map {
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+.item-map.active {
+    background-color: #f0f0f0;
+    border-color: #999;
+}
+
+.item-map .name{
+    color: #ac7323;
+}
+
+:root {
+    --current-font-size: 16px;
+}
+
+
+.box-list-map div,
+.box-list-map table,
+.box-list-map td,
+.box-list-map .name {
+    font-size: calc(var(--current-font-size) - 3px) !important;
+}
+
+
+/* Css phần footer */
+
+
+.footer{
+    height: 300px;
+    background-color: black;
+    color: white;
+    display: flex;
+}
+
+.cuoi{
+    background-color: rgb(65, 63, 63);
+}
+.trongcuoi{
+    width: 80%;
+    justify-content: center;
+    margin: 0 auto;
+    color: white;
+    line-height: 2.4;
+}
+
+
+
+
+.footer .a{
+    width: 80%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+    
+    
+}
+
+.khung2 h1{
+    color: #eb983e;
+}
+
+th, td {
+    padding:10px 0; 
+    text-align: left;
+}
+
+.footer a{
+    text-decoration: none;
+    color: white;
+}
+
+.footer .khung3 ul{
+    list-style-type: none;
+}
+
+.title-footer h3{
+    color: #eb983e;
+}
+
+.footer .khung3 li{
+    margin: 10px 0;
+}
+
+.khung4{
+    display: flex;
+}
+
+.khung4 img{
+    width: 30px;
+}
+ 
+.khung4_2 .cell-1-2 img{
+    width: 90px;
+}
+
+.khung4 .title-footer{
+    color: #eb983e;
+}
+
+.khung4_2{
+    margin: 10px 10px;
+}
+
+.khung4_2 .linksmo{
+    padding:5px 0;
+}
+
+
+
+
