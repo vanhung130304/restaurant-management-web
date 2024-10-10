@@ -7,6 +7,164 @@
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+    }
+    
+    header h1 {
+        margin: 0;
+    }
+    
+    .sidebar {
+        width: 250px;
+        background-color: #333;
+        position: fixed;
+        height: 100%;
+        top: 0;
+        left: 0;
+        padding-top: 20px;
+        overflow-y: auto;
+    }
+    
+    .sidebar a {
+        display: block;
+        padding: 10px 20px;
+        text-decoration: none;
+        color: #fff;
+        font-size: 18px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .sidebar a:hover {
+        background-color: #575757;
+    }
+    
+    .main-content {
+        margin-left: 270px;
+        padding: 20px;
+    }
+    
+    .card {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    
+    .card h2 {
+        margin-top: 0;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    table th,
+    table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    table th {
+        background-color: #f4f4f4;
+    }
+    
+    button {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .add-btn {
+        background-color: #007bff;
+        color: white;
+    }
+    
+    .add-btn:hover {
+        background-color: #0056b3;
+    }
+    
+    .edit-btn {
+        background-color: #ffc107;
+        color: white;
+    }
+    
+    .edit-btn:hover {
+        background-color: #e0a800;
+    }
+    
+    .delete-btn {
+        background-color: #dc3545;
+        color: white;
+    }
+    
+    .delete-btn:hover {
+        background-color: #c82333;
+    }
+    
+    .modal {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .modal-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        width: 400px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .modal-content h3 {
+        margin-top: 0;
+    }
+    
+    .modal-content p {
+        margin-bottom: 10px;
+    }
+    
+    .modal-close {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        float: right;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+</style>
 <body>
 
 <header>
@@ -75,3 +233,124 @@
                     <td>Nguyễn Văn A</td>
                     <td>95,000 VND</td>
                     <td>Đang xử lý</td>
+                    <td><button onclick="viewOrder('001')">Xem Chi Tiết</button></td>
+                </tr>
+                <tr>
+                    <td>002</td>
+                    <td>Trần Thị B</td>
+                    <td>120,000 VND</td>
+                    <td>Hoàn thành</td>
+                    <td><button onclick="viewOrder('002')">Xem Chi Tiết</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card" id="revenue" style="display:none;">
+        <h2>Doanh Thu Cửa Hàng</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tháng Hiện Tại</th>
+                    <th>Tổng Doanh Thu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tháng 10</td>
+                    <td>1,000,000 VND</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card" id="revenueHistory" style="display:none;">
+        <h2>Lịch Sử Doanh Thu</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tháng</th>
+                    <th>Tổng Doanh Thu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tháng 1</td>
+                    <td>1,000,000 VND</td>
+                </tr>
+                <tr>
+                    <td>Tháng 2</td>
+                    <td>1,200,000 VND</td>
+                </tr>
+                <tr>
+                    <td>Tháng 3</td>
+                    <td>950,000 VND</td>
+                </tr>
+                <!-- Thêm các tháng trước ở đây -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal Thêm Sản Phẩm -->
+<div class="modal" id="addProductModal">
+    <div class="modal-content">
+        <h3>Thêm Sản Phẩm</h3>
+        <div class="form-group">
+            <label for="productName">Tên Sản Phẩm:</label>
+            <input type="text" id="productName">
+        </div>
+        <div class="form-group">
+            <label for="productPrice">Giá:</label>
+            <input type="text" id="productPrice">
+        </div>
+        <div class="form-group">
+            <label for="productQuantity">Số Lượng:</label>
+            <input type="text" id="productQuantity">
+        </div>
+        <button class="modal-close" onclick="closeAddProductModal()">Đóng</button>
+        <button onclick="addProduct()">Thêm Sản Phẩm</button>
+    </div>
+</div>
+
+<script>
+    function showSection(sectionId) {
+        const sections = ['products', 'orders', 'revenue', 'revenueHistory'];
+        sections.forEach(section => {
+            document.getElementById(section).style.display = (section === sectionId) ? 'block' : 'none';
+        });
+    }
+
+    function showAddProductModal() {
+        document.getElementById('addProductModal').style.display = 'flex';
+    }
+
+    function closeAddProductModal() {
+        document.getElementById('addProductModal').style.display = 'none';
+    }
+
+    function addProduct() {
+        const name = document.getElementById('productName').value;
+        const price = document.getElementById('productPrice').value;
+        const quantity = document.getElementById('productQuantity').value;
+        
+        // Thêm mã thêm sản phẩm vào bảng sản phẩm ở đây
+
+        closeAddProductModal();
+    }
+
+    function showEditProductModal(button) {
+        // Hiển thị modal sửa sản phẩm ở đây
+    }
+
+    function deleteProduct(button) {
+        // Xóa sản phẩm ở đây
+    }
+
+    function viewOrder(orderId) {
+        // Xem chi tiết đơn hàng ở đây
+    }
+</script>
+
+</body>
+</html>
