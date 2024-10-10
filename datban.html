@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="He_Thong_Cua_Hang.css">
+    <link rel="stylesheet" href="datban.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="apple-touch-icon" sizes="57x57" href="./Logo/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="./Logo/apple-icon-60x60.png">
@@ -50,9 +50,9 @@
               <ul class="main-menu">
                   <li><a href="Trang_Chu.html"><h3>TRANG CHỦ</h3></a></li>
                   <li>
-                      <a href="#"><h3>GIỚI THIỆU</h3></a>
+                      <a href="Gioi_thieu.html"><h3>GIỚI THIỆU</h3></a>
                       <ul class="sub-menu">
-                          <li><a href="#"><h3>HỆ THỐNG NHÀ HÀNG</h3></a></li>
+                          <li><a href="He_Thong_Cua_Hang.html"><h3>HỆ THỐNG NHÀ HÀNG</h3></a></li>
                       </ul>
                   </li>
                   <li>
@@ -72,7 +72,7 @@
                       </ul>
                   </li>
                   <li><a href="uudai.html"><h3>ƯU ĐÃI</h3></a></li>
-                  <li><a href="#"><h3>BLOG ẨM THỰC</h3></a></li>
+                  <li><a href="Blog_am_thuc.html"><h3>BLOG ẨM THỰC</h3></a></li>
                   <li>
                       <a href="./He_Thong_Cua_Hang.html"><h3>HỆ THỐNG CỬA HÀNG</h3></a>
                       <ul class="sub-menu">
@@ -96,11 +96,11 @@
                               <li><a href=""><h3>Nét Huế Nguyễn Văn Lộc</h3></a></li>
                       </ul>
                   </li>
-                  <li><a href="tuyendung.html"><h3>TUYỂN DỤNG</h3></a></li>
+                  <li><a href="./tuyendung.html"><h3>TUYỂN DỤNG</h3></a></li>
                   <li><a href="./Lien_he.html"><h3>LIÊN HỆ</h3></a></li>
               </ul>
               <div class="Datban">
-                  <a href="C:\Users\Asus\Music\ktpm\restaurant-management-web\datban.html"><h3>ĐẶT BÀN</h3></a>
+                  <a href="#"><h3>ĐẶT BÀN</h3></a>
               </div>
           </div>
         </header>
@@ -109,15 +109,74 @@
             <div class="content">
                 <a href="Trang_Chu.html" class="tc">Trang chủ</a>
                 <p>&#62</p>
-                <a href="#" class="lh">Hệ thống cửa hàng</a>
+                <a href="#" class="lh">Đặt bàn</a>
             </div>
         </div>
+
+        <div class="c1">
+
+        </div>
+
+        <div class="body1">
+            <section class="menubar">
+                <div class="bar">
+                    <img src="C:\Users\Asus\Music\ktpm\restaurant-management-web\img\datban.png" alt="">
+                </div>
+                <div class="abc">
+                <p>Hãy cũng khám phá thực đơn tại nhà hàng Nét Huế để được thưởng thức trọn hương vị ẩm thực</p>
+                <h3>
+                    Huế Tinh hoa ẩm thực Huế
+                </h3>
+            </div>
+            </section>
+
+
+
+        <div class="reservation-container">
+            <div class="left-section">
+                <!-- Ảnh bên trái -->
+                <img src="C:\Users\Asus\Music\ktpm\restaurant-management-web\img\img_datban.png" alt="Image description" class="restaurant-image">
+            </div>
+            <div class="right-section">
+                <!-- Form đặt bàn -->
+                <form class="reservation-form">
+                    <div class="form-row">
+                        <label for="name">Họ tên</label>
+                        <input type="text" id="name" placeholder="Họ tên">
+                    </div>
+                    <div class="form-row">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-row">
+                        <label for="phone">Điện thoại</label>
+                        <input type="tel" id="phone" placeholder="Điện thoại">
+                    </div>
+                    <div class="form-row">
+                        <label for="date">Thời gian</label>
+                        <input type="date" id="date">
+                        <input type="time" id="time">
+                    </div>
+                    <div class="form-row">
+                        <label for="people">Số người</label>
+                        <input type="number" id="people" placeholder="Số người">
+                    </div>
+                    <div class="form-row">
+                        <button type="button" id="submitBtn">Đặt bàn ngay</button>
+                    </div>
+                </form>
+                <div id="resultMessage" style="display: none; margin-top: 20px; color: green; font-weight: bold;"></div>
+            </div>
+        </div>
+        
+
+
+        
+
+    </div>
+
+
         <div class="body">
-    
-
-
-
-
                 <div class="grid">
                     <div class="Hethong">
                         <div class="title">Hệ thống nhà hàng</div>
@@ -560,5 +619,6 @@
             </div>
         </div>
     </div>
+    <script src="datban.js"></script>
 </body>
 </html>
