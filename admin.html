@@ -221,47 +221,23 @@
             <thead>
                 <tr>
                     <th>Mã Đơn Hàng</th>
-                    <th>Khách Hàng</th>
-                    <th>Tổng Tiền</th>
-                    <th>Trạng Thái</th>
-                    <th>Hành Động</th>
+                    <th>Tên Món Ăn</th>
+                    <th>Số Lượng</th>
+                    <th>Giá</th>
+                    <th>Giá Cuối Cùng</th>
+                    <th>Mã Giảm Giá</th>
+                    <th>Địa Chỉ</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>001</td>
-                    <td>Nguyễn Văn A</td>
-                    <td>95,000 VND</td>
-                    <td>Đang xử lý</td>
-                    <td><button onclick="viewOrder('001')">Xem Chi Tiết</button></td>
-                </tr>
-                <tr>
-                    <td>002</td>
-                    <td>Trần Thị B</td>
-                    <td>120,000 VND</td>
-                    <td>Hoàn thành</td>
-                    <td><button onclick="viewOrder('002')">Xem Chi Tiết</button></td>
-                </tr>
+            <tbody id="orderTableBody">
+                <!-- Rows will be dynamically inserted here by JavaScript -->
             </tbody>
         </table>
     </div>
 
     <div class="card" id="revenue" style="display:none;">
-        <h2>Doanh Thu Cửa Hàng</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Tháng Hiện Tại</th>
-                    <th>Tổng Doanh Thu</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Tháng 10</td>
-                    <td>1,000,000 VND</td>
-                </tr>
-            </tbody>
-        </table>
+        <h2>Tổng Doanh Thu</h2>
+        <p id="totalRevenue">0 VND</p>  <!-- This will be dynamically updated -->
     </div>
 
     <div class="card" id="revenueHistory" style="display:none;">
@@ -351,6 +327,6 @@
         // Xem chi tiết đơn hàng ở đây
     }
 </script>
-
+<script type = "module" src = "firebase-payment-history.js"></script>
 </body>
 </html>
