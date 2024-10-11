@@ -21,8 +21,7 @@ async function fetchReservations() {
         const reservationSnapshot = await getDocs(reservationRef);
         const reservationList = reservationSnapshot.docs.map(doc => doc.data());
 
-        displayReservations(reservationList);
-        console.log(reservationList);  
+        displayReservations(reservationList); 
     } catch (error) {
         console.error("Error fetching reservations:", error);
     }

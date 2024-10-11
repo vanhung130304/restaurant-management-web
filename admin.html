@@ -241,28 +241,36 @@
     </div>    
 </div>
 
-<!-- Modal Thêm Sản Phẩm -->
-<div class="modal" id="addProductModal">
+<div id="editProductModal" class="modal">
     <div class="modal-content">
-        <h3>Thêm Sản Phẩm</h3>
-        <div class="form-group">
-            <label for="productName">Tên Sản Phẩm:</label>
-            <input type="text" id="productName">
-        </div>
-        <div class="form-group">
-            <label for="productPrice">Giá:</label>
-            <input type="text" id="productPrice">
-        </div>
-        <div class="form-group">
-            <label for="productQuantity">Số Lượng:</label>
-            <input type="text" id="productQuantity">
-        </div>
-        <button class="modal-close" onclick="closeAddProductModal()">Đóng</button>
-        <button onclick="addProduct()">Thêm Sản Phẩm</button>
+        <h2>Edit Product</h2>
+        <input type="text" id="editProductName" placeholder="Product Name">
+        <br>
+        <input type="number" id="editProductPrice" placeholder="Product Price">
+        <br>
+        <button id="updateProductBtn">Update</button>
+        <button class="close-modal" onclick="closeEditProductModal()">Close</button>
     </div>
 </div>
 
+<div class="modal" id="addProductModal" style="display:none;">
+    <div class="modal-content">
+        <label for="addProductName">Name:</label>
+        <input id="addProductName" type="text">
+        <br>
+        <label for="addProductPrice">Price:</label>
+        <input id="addProductPrice" type="number">
+        <br>
+        <button id="addbtn">Add</button>
+        <button onclick="closeAddProductModal()">Close</button>
+    </div>
+</div>
+
+
 <script>
+    function closeEditProductModal() {
+        document.getElementById('editProductModal').style.display = 'none';
+    }
     function showSection(sectionId) {
         const sections = ['products', 'orders', 'revenue', 'reservations'];
         sections.forEach(section => {
@@ -278,27 +286,17 @@
         document.getElementById('addProductModal').style.display = 'none';
     }
 
-    function addProduct() {
-        const name = document.getElementById('productName').value;
-        const price = document.getElementById('productPrice').value;
-        const quantity = document.getElementById('productQuantity').value;
-        
-        // Thêm mã thêm sản phẩm vào bảng sản phẩm ở đây
-
-        closeAddProductModal();
+    function openAddProductModal() {
+        document.getElementById('addProductModal').style.display = 'flex';
+    }
+    
+    function closeAddProductModal() {
+        document.getElementById('addProductModal').style.display = 'none';
     }
 
-    function showEditProductModal(button) {
-        // Hiển thị modal sửa sản phẩm ở đây
-    }
+    
+    
 
-    function deleteProduct(button) {
-        // Xóa sản phẩm ở đây
-    }
-
-    function viewOrder(orderId) {
-        // Xem chi tiết đơn hàng ở đây
-    }
 </script>
 <script type = "module" src = "firebase-payment-history.js"></script>
 <script type="module" src="firebase-menu.js"></script>
