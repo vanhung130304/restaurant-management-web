@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-image: url('https://nethue.com.vn/uploaded/tin-tuc-khampha-1.jpg'); /* Đường dẫn đến hình nền nét Huế */
+            background-image: url('https://nethue.com.vn/uploaded/tin-tuc-khampha-1.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -21,9 +21,8 @@
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.8); /* Nền trắng có độ trong suốt */
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 30px;
-            
             border-radius: 15px;
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
             width: 350px;
@@ -36,24 +35,22 @@
             color: #333;
         }
 
-        
-input[type="text"],
-input[type="password"] {
-    width: 90%; /* Chiều rộng 90% để tạo khoảng cách bên trái và bên phải */
-    padding: 10px; /* Khoảng cách bên trong */
-    margin: 10px 0; /* Khoảng cách bên ngoài */
-    border: 1px solid #ccc; /* Đường viền */
-    border-radius: 4px; /* Bo góc */
-    font-size: 16px; /* Kích thước chữ */
-    transition: border-color 0.3s; /* Hiệu ứng chuyển tiếp cho đường viền */
-}
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
 
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border-color: #66afe9; /* Màu viền khi focus */
-    outline: none; /* Loại bỏ đường viền mặc định */
-}
-
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #66afe9;
+            outline: none;
+        }
 
         button {
             width: 100%;
@@ -92,7 +89,6 @@ input[type="password"]:focus {
             display: none;
         }
 
-        /* Bảng thông báo */
         .modal {
             display: none;
             position: fixed;
@@ -135,6 +131,7 @@ input[type="password"]:focus {
     <input type="password" id="loginPassword" placeholder="Mật khẩu" required>
     <button onclick="login()">Đăng Nhập</button>
     <p>Bạn chưa có tài khoản? <a href="#" onclick="showRegister()">Đăng ký tại đây</a></p>
+    <p>Bạn là admin? <a href="#" onclick="showAdminLogin()">Đăng nhập admin</a></p> <!-- Thêm dòng này -->
 </div>
 
 <div id="registerForm" class="container hidden">
@@ -145,24 +142,29 @@ input[type="password"]:focus {
     <p>Bạn đã có tài khoản? <a href="#" onclick="showLogin()">Đăng nhập tại đây</a></p>
 </div>
 
+<div id="adminLoginForm" class="container hidden"> <!-- Form đăng nhập admin -->
+    <h2>Đăng Nhập Admin</h2>
+    <input type="text" id="adminUsername" placeholder="Tên đăng nhập admin" required>
+    <input type="password" id="adminPassword" placeholder="Mật khẩu admin" required>
+    <button onclick="adminLogin()">Đăng Nhập Admin</button>
+    <p>Bạn là người dùng? <a href="#" onclick="showLogin()">Đăng nhập người dùng</a></p>
+</div>
+
 <div id="logoutForm" class="container hidden">
     <h2>Chào mừng, <span id="usernameDisplay"></span>!</h2>
     <button onclick="logout()">Đăng Xuất</button>
 </div>
 
-<!-- Bảng thông báo -->
 <div id="notificationModal" class="modal">
     <p id="notificationMessage"></p>
     <button onclick="closeModal()">OK</button>
 </div>
 
 <script>
-    // Lấy dữ liệu người dùng từ localStorage
     function getUsers() {
         return JSON.parse(localStorage.getItem('users')) || {};
     }
 
-    // Lưu người dùng vào localStorage
     function saveUsers(users) {
         localStorage.setItem('users', JSON.stringify(users));
     }
@@ -170,11 +172,19 @@ input[type="password"]:focus {
     function showLogin() {
         document.getElementById('loginForm').classList.remove('hidden');
         document.getElementById('registerForm').classList.add('hidden');
+        document.getElementById('adminLoginForm').classList.add('hidden');
     }
 
     function showRegister() {
         document.getElementById('loginForm').classList.add('hidden');
         document.getElementById('registerForm').classList.remove('hidden');
+        document.getElementById('adminLoginForm').classList.add('hidden');
+    }
+
+    function showAdminLogin() {
+        document.getElementById('loginForm').classList.add('hidden');
+        document.getElementById('registerForm').classList.add('hidden');
+        document.getElementById('adminLoginForm').classList.remove('hidden');
     }
 
     function login() {
@@ -210,6 +220,22 @@ input[type="password"]:focus {
         }
     }
 
+    function adminLogin() {
+        const adminUsername = document.getElementById('adminUsername').value;
+        const adminPassword = document.getElementById('adminPassword').value;
+
+        // Tài khoản admin cố định
+        const fixedAdminUsername = 'admin'; // Tên đăng nhập admin
+        const fixedAdminPassword = 'admin123'; // Mật khẩu admin
+
+        if (adminUsername === fixedAdminUsername && adminPassword === fixedAdminPassword) {
+            showNotification('Đăng nhập admin thành công!');
+            window.location.href = "admin.html"; // Chuyển đến trang admin
+        } else {
+            showNotification('Tên đăng nhập hoặc mật khẩu admin không đúng!');
+        }
+    }
+
     function logout() {
         showNotification('Bạn đã đăng xuất!');
         sessionStorage.removeItem("username");
@@ -217,16 +243,25 @@ input[type="password"]:focus {
         document.getElementById('loginForm').classList.remove('hidden');
     }
 
-    // Hàm hiển thị bảng thông báo
     function showNotification(message) {
-        document.getElementById('notificationMessage').textContent = message;
+        document.getElementById('notificationMessage').innerText = message;
         document.getElementById('notificationModal').style.display = 'block';
     }
 
-    // Hàm đóng bảng thông báo
     function closeModal() {
         document.getElementById('notificationModal').style.display = 'none';
     }
+
+    window.onload = function () {
+        const username = sessionStorage.getItem("username");
+        if (username) {
+            document.getElementById('usernameDisplay').innerText = username;
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('adminLoginForm').classList.add('hidden');
+            document.getElementById('logoutForm').classList.remove('hidden');
+        }
+    };
 </script>
 
 </body>
