@@ -75,8 +75,6 @@ async function calculateTotalRevenue() {
             const order = doc.data();
             const finalPrice = parsePrice(order.final_price);
             totalRevenue += finalPrice;  // Add the final price to the total revenue
-            console.log(order.finalPrice);
-            console.log(finalPrice);
         });
 
         // Display the total revenue

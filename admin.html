@@ -175,7 +175,7 @@
     <a href="#" onclick="showSection('products')"><i class="fas fa-box"></i> Quản Lý Sản Phẩm</a>
     <a href="#" onclick="showSection('orders')"><i class="fas fa-receipt"></i> Quản Lý Đơn Hàng</a>
     <a href="#" onclick="showSection('revenue')"><i class="fas fa-chart-line"></i> Doanh Thu Cửa Hàng</a>
-    <a href="#" onclick="showSection('revenueHistory')"><i class="fas fa-history"></i> Lịch Sử Doanh Thu</a>
+    <a href="#" onclick="showSection('reservations')"><i class="fas fa-history"></i>Đặt Bàn</a>
     <a href="#"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a>
 </div>
 
@@ -188,29 +188,11 @@
                 <tr>
                     <th>Tên Sản Phẩm</th>
                     <th>Giá</th>
-                    <th>Số Lượng</th>
                     <th>Hành Động</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Bún Huế</td>
-                    <td>50,000 VND</td>
-                    <td>30</td>
-                    <td>
-                        <button class="edit-btn" onclick="showEditProductModal(this)">Sửa</button>
-                        <button class="delete-btn" onclick="deleteProduct(this)">Xóa</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Cơm Huế</td>
-                    <td>45,000 VND</td>
-                    <td>50</td>
-                    <td>
-                        <button class="edit-btn" onclick="showEditProductModal(this)">Sửa</button>
-                        <button class="delete-btn" onclick="deleteProduct(this)">Xóa</button>
-                    </td>
-                </tr>
+                
             </tbody>
         </table>
     </div>
@@ -240,32 +222,23 @@
         <p id="totalRevenue">0 VND</p>  <!-- This will be dynamically updated -->
     </div>
 
-    <div class="card" id="revenueHistory" style="display:none;">
-        <h2>Lịch Sử Doanh Thu</h2>
+    <div class="card" id="reservations" style="display:none;">
+        <h2>Danh Sách Đặt Bàn</h2>
         <table>
             <thead>
                 <tr>
-                    <th>Tháng</th>
-                    <th>Tổng Doanh Thu</th>
+                    <th>Tên Khách Hàng</th>
+                    <th>Số Người</th>
+                    <th>Ngày & Giờ</th>
+                    <th>Số Điện Thoại</th>
+                    <th>Email</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Tháng 1</td>
-                    <td>1,000,000 VND</td>
-                </tr>
-                <tr>
-                    <td>Tháng 2</td>
-                    <td>1,200,000 VND</td>
-                </tr>
-                <tr>
-                    <td>Tháng 3</td>
-                    <td>950,000 VND</td>
-                </tr>
-                <!-- Thêm các tháng trước ở đây -->
+            <tbody id="reservationTableBody">
+                
             </tbody>
         </table>
-    </div>
+    </div>    
 </div>
 
 <!-- Modal Thêm Sản Phẩm -->
@@ -291,7 +264,7 @@
 
 <script>
     function showSection(sectionId) {
-        const sections = ['products', 'orders', 'revenue', 'revenueHistory'];
+        const sections = ['products', 'orders', 'revenue', 'reservations'];
         sections.forEach(section => {
             document.getElementById(section).style.display = (section === sectionId) ? 'block' : 'none';
         });
@@ -328,5 +301,7 @@
     }
 </script>
 <script type = "module" src = "firebase-payment-history.js"></script>
+<script type="module" src="firebase-menu.js"></script>
+<script type="module" src="firebase-reservation2.js"></script>
 </body>
 </html>
