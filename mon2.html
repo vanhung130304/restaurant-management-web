@@ -160,7 +160,7 @@
         <div class="food-section">
             <img src="https://www.nethue.com.vn/temp/-uploaded-T%E1%BA%BFt%202023_nh%20vu%C3%B4ng%20Crop,%20khoai%20t%C3%ADa_cr_521x521.jpg" alt="Khoai Tía Phomai" class="food-image">
             <div class="food-info">
-                <h2>Khoai Tía Phomai</h2>
+                <h2 id = "food-name">Khoai Tía Phomai</h2>
                 <p>Món khoai tía phomai giòn rụm, thơm ngon và béo ngậy với phomai tan chảy.</p>
                 <p><strong>Giá: 56,000 VND</strong></p>
                 <label for="quantity">Số lượng: </label>
@@ -185,7 +185,7 @@
                 
                 <label for="address">Nhập địa chỉ giao hàng:</label>
                 <input type="text" id="address" placeholder="Nhập địa chỉ của bạn...">
-                <button onclick="thanhToan()">Đặt hàng ngay</button>
+                <button id = "thanhtoan-btn">Đặt hàng ngay</button>
                 <button class="home-btn" onclick="quayVeTrangChu()">Home</button>
             </div>
         </div>
@@ -211,9 +211,73 @@
         </div>
     </div>
 
+    <script type="module">
+        const ThanhToan_btn = document.getElementById("thanhtoan-btn");
+        const price = 75000;
+
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js';
+        import { getAuth } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
+        import { getFirestore, doc, setDoc, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js';
+
+        let firebaseConfig = {
+            apiKey: "AIzaSyDfgWRy7bLoMaoH-4XEd6RRjVADeSUG8sY",
+            authDomain: "nethue-ktpm.firebaseapp.com",
+            projectId: "nethue-ktpm",
+            storageBucket: "nethue-ktpm.appspot.com",
+            messagingSenderId: "923818382455",
+            appId: "1:923818382455:web:a7583381f3c3b211e66272",
+            measurementId: "G-G81N2NNXDF"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        ThanhToan_btn.addEventListener("click", async (e) => {
+            e.preventDefault();
+        
+            const food_name = document.getElementById("food-name").innerText;
+            const address = document.getElementById("address").value;
+            const final_price = document.getElementById("final-price").innerText;
+            const discount_code_input = document.getElementById("discount-code-input").value;
+            const discount_code_select = document.getElementById("discount-code-select").value;
+            const quantity = parseInt(document.getElementById("quantity").value);
+        
+            if (!address) {
+                alert("Vui lòng nhập địa chỉ giao hàng");
+                return;
+            }
+        
+            try {
+                const ordersSnapshot = await getDocs(collection(db, "orders"));
+                const orderCount = ordersSnapshot.size;
+        
+                const newOrderId = (orderCount + 1).toString();
+        
+                await setDoc(doc(db, "orders", newOrderId), {
+                    id: newOrderId,
+                    food_name: food_name,
+                    price: price, 
+                    quantity: quantity,
+                    discount_code_input: discount_code_input,
+                    discount_code_select: discount_code_select,
+                    final_price: final_price,
+                    address: address,
+                });
+        
+            } catch (error) {
+                console.error("Error creating order: ", error);
+            }
+        });
+
+    </script>
+
     <script>
+        document.getElementById("thanhtoan-btn").addEventListener("click", thanhToan);
+
         function updateTotal() {
-            const price = 56000; // Đổi giá thành 56,000
+            const price = 75000;
             const quantity = document.getElementById("quantity").value;
             const totalPrice = price * quantity;
             document.getElementById("total-price").textContent = totalPrice.toLocaleString() + " VND";
@@ -222,52 +286,47 @@
 
         function applyDiscount() {
             const quantity = document.getElementById("quantity").value;
-            const price = 56000; // Đổi giá thành 56,000
+            const price = 75000;
             let totalPrice = price * quantity;
             const discountCodeSelect = document.getElementById("discount-code-select").value;
             const discountCodeInput = document.getElementById("discount-code-input").value.trim().toUpperCase();
 
-            if (discountCodeSelect !== "none") {
-                totalPrice = applyDiscountCode(totalPrice, discountCodeSelect);
-            }
-            if (discountCodeInput) {
-                totalPrice = applyDiscountCode(totalPrice, discountCodeInput);
+            if (discountCodeSelect === "GIAM10" || discountCodeInput === "GIAM10") {
+                totalPrice *= 0.9; // Giảm 10%
+            } else if (discountCodeSelect === "GIAM20" || discountCodeInput === "GIAM20") {
+                totalPrice *= 0.8; // Giảm 20%
+            } else if (discountCodeSelect === "HUNG" || discountCodeInput === "HUNG") {
+                totalPrice *= 0.5; // Giảm 50%
             }
 
             document.getElementById("final-price").textContent = totalPrice.toLocaleString() + " VND";
-        }
-
-        function applyDiscountCode(totalPrice, code) {
-            switch (code) {
-                case "GIAM10":
-                    return totalPrice * 0.9; // Giảm 10%
-                case "GIAM20":
-                    return totalPrice * 0.8; // Giảm 20%
-                case "FREESHIP":
-                    return totalPrice; // Miễn phí vận chuyển, không giảm giá
-                case "HUNG":
-                    return totalPrice * 0.5; // Giảm 50%
-                default:
-                    return totalPrice; // Không giảm
-            }
         }
 
         function thanhToan() {
             const quantity = document.getElementById("quantity").value;
             const address = document.getElementById("address").value;
             const finalPrice = document.getElementById("final-price").textContent;
+
+            if (address === "") {
+                alert("Vui lòng nhập địa chỉ giao hàng.");
+                return;
+            }
+
             document.getElementById("order-quantity").textContent = quantity;
-            document.getElementById("order-address").textContent = address;
             document.getElementById("order-final-price").textContent = finalPrice;
+            document.getElementById("order-address").textContent = address;
+
+            // Hiển thị modal xác nhận đơn hàng
             document.getElementById("success-modal").style.display = "block";
         }
 
         function closeModal() {
             document.getElementById("success-modal").style.display = "none";
+            quayVeTrangChu();
         }
 
         function quayVeTrangChu() {
-            window.location.href = "Thuc_don.html"; // Đổi đường dẫn về trang chủ
+            window.location.href = "Thuc_don.html"; // Chuyển về trang chủ
         }
     </script>
 </body>

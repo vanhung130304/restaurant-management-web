@@ -265,14 +265,11 @@
             }
         
             try {
-                // Get the current number of orders
                 const ordersSnapshot = await getDocs(collection(db, "orders"));
                 const orderCount = ordersSnapshot.size; // The number of orders
         
-                // Use the count + 1 as the new order index
                 const newOrderId = (orderCount + 1).toString();
         
-                // Save the order with the new index as the ID
                 await setDoc(doc(db, "orders", newOrderId), {
                     id: newOrderId,
                     food_name: food_name,
@@ -284,7 +281,6 @@
                     address: address,
                 });
         
-                // Show a success alert and then redirect to the home page after user clicks "OK"
                 alert("Đặt Hàng Thành Công");
                 quayVeTrangChu();
         
