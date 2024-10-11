@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm nhà hàng Nét Huế gần Phenikaa</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <style>
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://product.hstatic.net/1000275435/product/net-hue-thai-ha-2_9675bf0f237e4b209af77f44192c646b_master.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #3a3131;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8); /* Nền mờ đậm hơn */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #ffd700;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        #map {
+            height: 500px;
+            margin-top: 20px;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            padding: 10px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ff6347;
+            border: none;
+            border-radius: 5px;
+            color: rgb(20, 19, 19);
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff4500;
+        }
+
+        input {
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        input:focus {
+            border-color: #ffd700;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        .distance-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.8); /* Điều chỉnh nền tối hơn */
+            color: #ffdd59; /* Đổi màu chữ sang vàng nhạt */
+            border-radius: 10px;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .distance-info span {
+            color: #ff6347; /* Màu chữ đậm hơn cho phần tên nhà hàng và khoảng cách */
+            font-weight: bold;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+
+            #map {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tìm nhà hàng Nét Huế gần Phenikaa</h1>
+        <input type="text" id="locationInput" placeholder="Nhập địa chỉ của bạn...">
+        <button id="findRestaurant">Tìm nhà hàng</button>
+        <div id="map"></div>
+        <div id="distanceInfo" class="distance-info" style="display: none;"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+    <script>
+        const map = L.map('map').setView([20.980793, 105.783438], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        const restaurants = [
+            { name: 'Nét Huế A', lat: 20.981812, lng: 105.784515 },
+            { name: 'Nét Huế B', lat: 20.982393, lng: 105.782245 },
+            { name: 'Nét Huế C', lat: 20.980950, lng: 105.783720 }
+        ];
+
+        function getDistance(lat1, lng1, lat2, lng2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = 
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        function findNearestRestaurant(lat, lng) {
+            let nearestRestaurant = null;
+            let minDistance = Infinity;
+
+            restaurants.forEach(restaurant => {
+                const distance = getDistance(lat, lng, restaurant.lat, restaurant.lng);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearestRestaurant = restaurant;
+                }
+            });
+
+            return nearestRestaurant;
+        }
+
+        function displayDistanceInfo(distance, restaurant) {
+            const distanceInfo = document.getElementById('distanceInfo');
+            distanceInfo.style.display = 'block';
+            distanceInfo.innerHTML = `Khoảng cách từ bạn đến <span>${restaurant.name}</span> là <span>${distance.toFixed(2)} km</span>`;
+        }
+
+        function routeToRestaurant(currentLat, currentLng, restaurant) {
+            L.Routing.control({
+                waypoints: [
+                    L.latLng(currentLat, currentLng),
+                    L.latLng(restaurant.lat, restaurant.lng)
+                ],
+                routeWhileDragging: true
+            }).addTo(map);
+
+            L.marker([restaurant.lat, restaurant.lng])
+                .addTo(map)
+                .bindPopup(restaurant.name)
+                .openPopup();
+        }
+
+        async function handleFindRestaurant() {
+            const locationInput = document.getElementById('locationInput').value;
+            const phenikaaLat = 20.980793;
+            const phenikaaLng = 105.783438;
+
+            if (locationInput.toLowerCase().includes('đại học phenikaa')) {
+                map.setView([phenikaaLat, phenikaaLng], 15);
+                L.marker([phenikaaLat, phenikaaLng])
+                    .addTo(map)
+                    .bindPopup('Đại học Phenikaa')
+                    .openPopup();
+
+                const nearestRestaurant = findNearestRestaurant(phenikaaLat, phenikaaLng);
+                const distance = getDistance(phenikaaLat, phenikaaLng, nearestRestaurant.lat, nearestRestaurant.lng);
+
+                displayDistanceInfo(distance, nearestRestaurant);
+                routeToRestaurant(phenikaaLat, phenikaaLng, nearestRestaurant);
+            } else {
+                alert('Vui lòng nhập đúng địa chỉ "Đại học Phenikaa"');
+            }
+        }
+
+        document.getElementById('findRestaurant').addEventListener('click', handleFindRestaurant);
+    </script>
+</body>
+</html>
